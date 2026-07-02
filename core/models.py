@@ -18,22 +18,22 @@ class Company(models.Model):
     def __str__(self):
         return self.name
     
-class Experience(models.Model):
-    company=models.CharField(max_length=100)
-    experience=models.PositiveIntegerField()
-    skills_learned=models.TextField()
-
-    def __str__(self):
-        return self.company
     
 class Candidate(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE)
     mobileno=models.CharField(max_length=15)
-    experience=models.OneToOneField(Experience, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.first_name    
 
+class Experience(models.Model):
+    company=models.CharField(max_length=100)
+    experience=models.PositiveIntegerField()
+    skills_learned=models.TextField()
+    candidate=models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='experience')
+
+    def __str__(self):
+        return self.company
     
 class JobPosting(models.Model):
     title=models.CharField(max_length=300)
@@ -49,8 +49,8 @@ class JobPosting(models.Model):
     
 class Application(models.Model):
     candidate=models.ForeignKey(Candidate, on_delete=models.CASCADE)
-    job=models.ManyToManyField(JobPosting)
-    status=models.CharField(max_length=10, choices=[('APPLIED','APPLIED'), ('SCREENING', 'SCREENING'), ('INTERVIEWING', 'INTERVIEWING')])
+    job=models.ForeignKey(JobPosting, on_delete=models.CASCADE)
+    status=models.CharField(max_length=20, choices=[('APPLIED','APPLIED'), ('SCREENING', 'SCREENING'), ('INTERVIEWING', 'INTERVIEWING')])
     resume_url=models.URLField()
     applied_on=models.DateTimeField(auto_now_add=True)
     
