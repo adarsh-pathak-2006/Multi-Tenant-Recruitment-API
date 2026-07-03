@@ -13,6 +13,7 @@ class RegisterView(View):
         form_data=RegisterForm(request.POST)
         if form_data.is_valid():
             username=form_data.cleaned_data['username']
+            role=form_data.cleaned_data['role']
             pass1=form_data.cleaned_data['password']
             pass2=form_data.cleaned_data['rep_password']
 
@@ -20,7 +21,7 @@ class RegisterView(View):
                 if User.objects.filter(username=username).exists():
                     return render(request, 'register.html', { 'form':form_data, 'user_err':'user alreadyt exists' })
                 else:
-                    User.objects.create_user(username=username, password=pass1)
+                    User.objects.create_user(username=username, role=role ,password=pass1)
                     return redirect('register')
                 
             else:

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Register Page{% endblock title %}
+
+{% block content %}
+
+<form method='POST'>
+    {% csrf_token %}
+    {{ form }}
+    <button type='submit'>Register</button>
+</form>
+
+{% if user_err %}
+{{ user_err }}
+{% endif %}
+
+{% if pass_err %}
+{{ pass_err }}
+{% endif %}
+
+{% if invalid %}
+{{ invalid }}
+{% endif %}
+
+{% endblock content %}
