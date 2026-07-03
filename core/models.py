@@ -12,6 +12,7 @@ class User(AbstractUser):
 
 
 class Company(models.Model):
+    recruiter=models.OneToOneField(User, on_delete=models.CASCADE)
     name=models.CharField(max_length=100)
     created_by=models.CharField(max_length=200)
     added_on=models.DateField(auto_now_add=True)
