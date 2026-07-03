@@ -2,10 +2,11 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    COMPANY='COMPANY'
+    RECRUITER='RECRUITER'
     CANDIDATE='CANDIDATE'
+    ADMIN='ADMIN'
 
-    ROLE_CHOICES=[(COMPANY, 'Company'), (CANDIDATE, 'Candidate')]
+    ROLE_CHOICES=[(RECRUITER, 'Recruiter'), (CANDIDATE, 'Candidate'), (ADMIN, 'Admin')]
 
     role=models.CharField(max_length=10, choices=ROLE_CHOICES)
 
