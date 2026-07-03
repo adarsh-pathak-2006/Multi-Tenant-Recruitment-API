@@ -6,20 +6,20 @@ User=get_user_model()
 
 class IsCandidate(BasePermission):
     def has_permission(self, request, view):
-        return (request.user.is_authenticated and request.user.role==User.Candidate)
+        return (request.user.is_authenticated and request.user.role==User.CANDIDATE)
     
 class IsRecruiter(BasePermission):
     def has_permission(self, request, view):
-        return (request.user.is_authenticated and request.user.role==User.Recruiter)
+        return (request.user.is_authenticated and request.user.role==User.RECRUITER)
     
 class IscandidateAndRecruiter(BasePermission):
     def has_permission(self, request, view):
-        return (request.user.is_authenticated and request.user.role in [User.Recruiter, User.Candidate])
+        return (request.user.is_authenticated and request.user.role in [User.RECRUITER, User.CANDIDATE])
 
 class IsAdmin(BasePermission):
     def has_permission(self, request, view):
-        return (request.user.is_authenticated and request.user.role==User.Admin)
+        return (request.user.is_authenticated and request.user.role==User.ADMIN)
     
 class IsAdminAndRecruiter(BasePermission):
     def has_permission(self, request, view):
-        return (request.user.is_authenticated and request.user.role in [User.Admin , User.Recruiter])
+        return (request.user.is_authenticated and request.user.role in [User.ADMIN , User.RECRUITER])
